@@ -1,24 +1,54 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| name               | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| assists1           | string |             |
+| assists2           | string |             |
+| frequency          | text   |             |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :schedules
+- has_one  :group
 
-* Configuration
+## groups テーブル
 
-* Database creation
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| name   | string     | null: false                    |
+| user   | references | null: false, foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- has_many :users
+- has_many :schedules
 
-* Services (job queues, cache servers, search engines, etc.)
+## schedules テーブル
 
-* Deployment instructions
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
+| start_time | string     | null: false                    |
+| content    | string     | null: false                    |
+| user       | references | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- belongs_to :group
+- belongs_to :user
+- has_one :need_assist
+
+## need_assists テーブル
+
+| Column   | Type       | Options                        |
+| -------- | ---------- | ------------------------------ |
+| user     | references | null: false, foreign_key: true |
+| schedule | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :schedule
