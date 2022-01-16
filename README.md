@@ -9,7 +9,7 @@
 | encrypted_password | string | null: false |
 | assists1           | string |             |
 | assists2           | string |             |
-| frequency          | text   |             |
+| memo               | text   |             |
 
 ### Association
 
@@ -32,7 +32,7 @@
 
 | Column     | Type       | Options                        |
 | ---------- | ---------- | ------------------------------ |
-| start_time | string     | null: false                    |
+| start_time | datetime   | null: false                    |
 | content    | string     | null: false                    |
 | user       | references | null: false, foreign_key: true |
 
