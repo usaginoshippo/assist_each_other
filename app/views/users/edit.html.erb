@@ -1,0 +1,47 @@
+<div class="contents row">
+  <div class="container">
+    <h2>Edit Account</h2>
+    <h2>ユーザー情報 編集ページ</h2>
+
+    <%= form_with model: current_user, local: true do |f| %>
+      <%# <%= render "devise/shared/error_messages", resource: resource %> 
+
+      <div class="field">
+        <%= f.label :name %> <em>(6 文字未満)</em><br />
+        <%= f.text_field :name, autofocus: true, maxlength: "6" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %> <i>(変更なければ空欄でOK)</i>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> 文字以上)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "on" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :assist1 %><br />
+        <%= f.text_field :assist1 %>
+      </div>
+
+      <div class="field">
+        <%= f.label :assist2 %><br />
+        <%= f.text_field :assist2 %>
+      </div>
+
+      <div class="field">
+        <%= f.label :memo %><br />
+        <%= f.text_area :memo, size:"30x10" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "更新する" %>
+      </div>
+    <% end %>
+  </div>
+</div>
