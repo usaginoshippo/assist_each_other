@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<div class="toppage">
+  <div class="schedule_toppage">
+  <h1 class="top">グループ名 名前 マイページ</h1>
+  </div>
+
+  <br>
+  <div class="col-md-8">
+    <%#= month_calendar events: @schedules do |date, schedules| %>
+    <%= month_calendar do |date, schedules| %>
+    <%= date.day %>
+
+    <% schedules.each do |schedule| %>
+      <div>
+        <%= schedule.user_id%>
+        <%= schedule.start_time.strftime("%H:%M") %>
+      </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>

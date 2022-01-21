@@ -1057,3 +1057,12 @@ footer p {
 .search-form .search-btn {
   width: 10%;
 }
+
+.time_assist{
+  width: 100%;
+  display: flex;
+}
+.schedule_toppage{
+  display: flex;
+  justify-content: center;
+}
