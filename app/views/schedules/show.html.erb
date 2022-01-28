@@ -1,36 +1,40 @@
 <p id="notice"><%= notice %></p>
-
-<div class="toppage">
-  <div class="schedule_toppage">
-  <h1 class="top">グループ名 名前 マイページ</h1>
-  </div>
-
-  <br>
+<div class='chat-room-form'>
   <div class="row">
     <div class="col-md-4">
-      <div class="schedule">今後の予定一覧</div>
-        <div class="show">
-          <p>
-          <strong>タイトル</strong>
-          <%= @schedule.user_id %>
-          </p>
-          <p>
-            <strong>内容</strong>
-            <%=@schedule.content %>
-          </p>
-          <p>
-            <strong>日時</strong>
-            <%= @schedule.start_time.strftime("%m/%d") %>
-            <%= @schedule.start_time.strftime("%H:%M")+"開始" %>
-          </p>
 
-          <%= link_to '編集', edit_schedule_path(@schedule) %>
-          <%= link_to '消去', schedule_path(@schedule.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %>
-          <%= link_to '戻る', schedules_path %>
+      <div class="schedule_toppage">
+      <h1 class="top"><%=current_user.name%></h1>
+      </div>
 
+    <br>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="schedule">今後の予定一覧</div>
+            <div class="show">
+              <p>
+              <strong>お手伝いする人</strong>
+              <%= @schedule.user_id %>
+              </p>
+              <p>
+                <strong>内容</strong>
+                <%=@schedule.content %>
+              </p>
+              <p>
+                <strong>日時</strong>
+                <%= @schedule.start_time.strftime("%m/%d") %>
+                <%= @schedule.start_time.strftime("%H:%M") %>
+              </p>
+
+              <%= link_to '編集', "/groups/#{@group.id}/schedules/#{@schedule.id}/edit" %>
+              <%= link_to '消去', group_schedule_path(@schedule.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %>
+              <%= link_to '戻る', :back %>
+
+            </div>
+
+            <br>
+          </div>
         </div>
-
-        <br>
       </div>
     </div>
   </div>

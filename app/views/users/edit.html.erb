@@ -43,5 +43,19 @@
         <%= f.submit "更新する" %>
       </div>
     <% end %>
+
+
+
+    <%# <%= form_with model: @group, local: true do |f| %>
+      <%# <div class="field">
+        <%#= f.label :groupe %><br />
+        <%#= f.collection_select(:group_id, Group.all, :id, :name) %>
+      <%# </div> %>
+      <%# <div class="actions"> %>
+        <%#= f.submit "更新する" %>
+      <%# </div> %>
+    <%# end %> 
+    <br>
+        <%= link_to "グループを変更する", groups_path, class:"btn" %>
   </div>
 </div>
