@@ -1,11 +1,9 @@
+<%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn" %>
 <p id="notice"><%= notice %></p>
 
-<div class="toppage">
-  <div class="schedule_toppage">
-  <h1 class="top">グループ名 名前</h1>
-  </div>
-  <br>
-
+<%= @group.name %>
+<%= current_user.name %>
+<div class='chat-room-form'>
   <div class="row">
     <div class="col-md-4">
       <div class="schedule">今後の予定一覧</div>
@@ -16,11 +14,10 @@
             <th>日程</th>
           </tr>
         </thead>
-
         <tbody>
           <% @schedules.each do |schedule| %>
           <tr>
-            <td><%= link_to schedule.content , schedule %></td>
+            <td><%= schedule.content %></td>
             <td><%= schedule.start_time.strftime("%m/%d") %></td>
           </tr>
           <% end %>
@@ -28,33 +25,33 @@
       </table>
       <br>
 
-      <%= form_with(model: @schedule, local: true) do |form| %>
+      <%= form_with(model: [@group,@schedule], local: true) do |form| %>
 
       <div class="title">
         <div class="form-tag">お手伝いする人を選んでください</div>
           <select name="schedule[user_id]">
-            <%# <%= Need_assist.where.not( (user.assist1)!= empty || id: current_user.id ).each do |user| %> %>
             <%= User.where.not( id: current_user.id ).each do |user| %>
             <option value=<%= user.id %>><%= user.name %></option>
             <% end %>
           </select>
-        <%# <%= form.text_field :user_id %>
         </div>
 
         <div class="content">
           <div class="form-tag">内容</div>
-            <select>
+          <%= form.text_field :content %>
+            <%# <select>
             <option>除雪</option>
             <option>排雪</option>
             <option>買い物</option>
             <option>食事</option>
             <option>洗濯</option>
             <option>掃除</option>
-            </select>
-          </div>
+            </select> %>
+
           <div class="time">
-            <div class="form-tag">時間</div>
+            <div class="form-tag">日時(例: 2022年12月13日-12:00)</div>
           </div>
+          
           <div class="time_assist">
             <%= form.datetime_select :start_time %>
           </div>
@@ -65,7 +62,7 @@
           <% end %>
         </div>
         <div>
-          <%= link_to '変更する', user_path(current_user.id) %>
+          <%= link_to 'マイページを表示', user_path(current_user.id), class: "btn" %>
         </div>
         <br>
         <br>
@@ -76,7 +73,11 @@
           <% schedules.each do |schedule| %>
             <div>
               <%# <%= @need_assist.user.name 助けてほしい人の名前 + "さんちの"  %> 
-              <%= link_to schedule.content, schedule %>
+              <% if current_user.id == schedule.user_id %>
+              <%= link_to schedule.content, "/groups/#{schedule.group.id}/schedules/#{schedule.id}" %>
+              <% else %>
+              <%= schedule.content %>
+              <% end %>
               <%= schedule.start_time.strftime("%H:%M") %>
               <%= schedule.user.name %>
             </div>

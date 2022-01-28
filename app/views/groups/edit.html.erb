@@ -1,0 +1,14 @@
+<div class='chat-room-form'>
+<h1>グループ編集</h1>
+
+<%= form_with(model: @group, local: true) do |f| %>
+  <div class="group-new-form">
+    <div class="gtoup-new-form-name">
+      <%= f.label :name, 'グループ名' %>
+      <%= f.text_field :name, class: 'chat__room_name chat-room-form__input', placeholder: 'グループ名を入力してください'%>
+      <%#= f.collection_select :group, Group.all, :id, :name %>
+    </div>
+    <%= f.submit 'グループに入る', class: "btn" %>
+  </div>
+<% end %>
+</div>

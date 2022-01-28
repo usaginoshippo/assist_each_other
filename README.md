@@ -14,19 +14,32 @@
 ### Association
 
 - has_many :schedules
-- has_one  :group
+- has_many :group_users
+- has_many :groups, through: :group_users
 
 ## groups テーブル
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 | name   | string     | null: false                    |
+
+### Association
+
+- has_many :group_users
+- has_many :users, through: :group_users
+- has_many :schedules
+
+## group_users テーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| group  | references | null: false, foreign_key: true |
 | user   | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :users
-- has_many :schedules
+- belongs_to :user
+- belongs_to :group
 
 ## schedules テーブル
 
@@ -35,6 +48,7 @@
 | start_time | datetime   | null: false                    |
 | content    | string     | null: false                    |
 | user       | references | null: false, foreign_key: true |
+| group      | references | null: false, foreign_key: true |
 
 ### Association
 

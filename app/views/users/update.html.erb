@@ -9,8 +9,14 @@
 <%= "assist1:"+ current_user.assist1 %><br />
 <%= "assist2:"+ current_user.assist2 %><br />
 <%= "メモ:"+ current_user.memo %><br />
-
-<%= link_to "カレンダーに戻る","#",class:"btn" %>
+<ul>
+  <li>
+  <% current_user.group_users.each do |group_user| %>
+  <%= group_user.group.name %>
+  <%end%>
+  </li>
+</ul>
+<%= link_to "カレンダーに戻る",root_path,class:"btn" %>
 
 </div>
 </div>
