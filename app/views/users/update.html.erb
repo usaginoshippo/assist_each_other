@@ -9,6 +9,8 @@
 <%= "assist1:"+ current_user.assist1 %><br />
 <%= "assist2:"+ current_user.assist2 %><br />
 <%= "メモ:"+ current_user.memo %><br />
+<br>
+<%= "グループ:"%>
 <ul>
   <li>
   <% current_user.group_users.each do |group_user| %>

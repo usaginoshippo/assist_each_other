@@ -20,11 +20,20 @@ ul {
 li {
   margin: 0;
   padding: 0;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .chat-room-form {
   width: 980px;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.mychat-room-form {
+  width: 100%;
   margin: 60px auto;
   padding: 40px;
   background-color: #fff;

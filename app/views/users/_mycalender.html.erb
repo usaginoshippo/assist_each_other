@@ -1,0 +1,26 @@
+<div class='mychat-room-form'>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="toppage">
+        <div class="schedule_toppage">
+        <h1 class="top"><%=current_user.name %><%=" 私の予定 "%></h1>
+        </div>
+        <br>
+        <div class="col-md-8">
+          <%= month_calendar events: current_user.schedules do |date, schedules| %>
+            <%= date.day %>
+
+            <% schedules.each do |schedule| %>
+            <div>
+              <%= schedule.assisted + "さんの" %>
+              <%= link_to schedule.content.name %>
+              <%= schedule.start_time.strftime("%H:%M") %>
+            </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div><br>
+      <%= link_to "ユーザー情報を変更する",  edit_user_path(current_user), method: :get , class:"btn" %>
+    </div>
+  </div>
+</div>

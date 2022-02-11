@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:edit, :update]
+
   def index
     @groups = Group.all
     @group_joining = GroupUser.where(user_id: current_user.id)
@@ -15,9 +16,9 @@ class GroupsController < ApplicationController
 
     if @group.save
        @group.users << current_user
-      redirect_to groups_path, notice: 'グループを作成しました'
+      redirect_to groups_path
     else
-      render :new
+      render :index
     end
   end
 
@@ -28,7 +29,7 @@ class GroupsController < ApplicationController
 
     if @group.update(group_params)
       @group.users << current_user
-      redirect_to  groups_path, method: :patch, notice: 'グループを編集しました'
+      redirect_to  groups_path, method: :patch
     else
       render :edit
     end
@@ -37,7 +38,7 @@ class GroupsController < ApplicationController
   def destroy
     @group = Group.find(params[:id])
     @group.destroy
-    redirect_to groups_path, notice: "グループを削除しました。"
+    redirect_to groups_path
   end
 
   private

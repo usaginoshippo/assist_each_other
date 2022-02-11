@@ -4,21 +4,21 @@
     <div class="col-md-4">
 
       <div class="schedule_toppage">
-      <h1 class="top"><%=current_user.name%></h1>
+      <h1 class="top"><%=current_user.name + "さんの予定"%></h1>
       </div>
 
     <br>
       <div class="row">
         <div class="col-md-4">
-          <div class="schedule">今後の予定一覧</div>
+          <div class="schedule"><h2>お手伝い内容</h2></div>
             <div class="show">
               <p>
               <strong>お手伝いする人</strong>
-              <%= @schedule.user_id %>
+              <%= @schedule.assisted %>
               </p>
               <p>
                 <strong>内容</strong>
-                <%=@schedule.content %>
+                <%=@schedule.content.name %>
               </p>
               <p>
                 <strong>日時</strong>
@@ -26,9 +26,9 @@
                 <%= @schedule.start_time.strftime("%H:%M") %>
               </p>
 
-              <%= link_to '編集', "/groups/#{@group.id}/schedules/#{@schedule.id}/edit" %>
-              <%= link_to '消去', group_schedule_path(@schedule.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %>
-              <%= link_to '戻る', :back %>
+              <%= link_to '編集', "/groups/#{@group.id}/schedules/#{@schedule.id}/edit" ,class:"btn"%>
+              <%= link_to '消去', group_schedule_path(@schedule.id), method: :delete, class:"btn", data: { confirm: '本当に削除していいですか？' } %>
+              <%= link_to '戻る', :back,class:"btn" %>
 
             </div>
 

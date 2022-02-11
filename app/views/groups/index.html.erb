@@ -2,39 +2,34 @@
  
   <h1>グループ一覧</h1>
     <div class="group-search">
-
-        <% if @group_joining == [] %>
-          <%= @group_lists_none %>
-        <% else %>
-            <div class="group-list">
-                <ul class="group-list-table">
-                    <% @groups.each do |group| %>
-                            <li class="group-list-table-each-group">
-                                <h2>グループ名</h2>
-                                <%= group.name %>(<%= group.user_ids.count %>)
-                                <h3> メンバー</h3>
-                                <% group.group_users.each do |group_user| %>
-                                <%= group_user.user.name %>
-                                <% end %>
-                            </li>
-                            <li>
-                                <% unless group.user_ids.include?(current_user.id) %>
-                                <%= link_to '参加する', edit_group_path(group.id), method: :get, class:"btn" %>
-                                <% end %>
-                                <%= link_to '削除', "/groups/#{group.id}", method: :delete, class:"btn" %>
-                            </li>
-                    <% end %>
-                </ul>
-            </div>
-        <% end %>
+      <%= "参加するグループを選んでください" %><br><br>
+        <div class="group-list">
+            <ul class="group-list-table">
+                <% @groups.each do |group| %>
+                    <li class="group-list-table-each-group">
+                        <h2>グループ名</h2>
+                        <%= group.name %>(<%= group.user_ids.count %>)
+                        <h3> メンバー</h3>
+                        <% group.group_users.each do |group_user| %>
+                        <%= group_user.user.name %>
+                        <% end %>
+                    </li><br><br>
+                    <li>
+                        <% unless group.user_ids.include?(current_user.id) %>
+                        <%= link_to '参加する', edit_group_path(group.id), method: :get, class:"btn" %>
+                        <% end %>
+                        <%= link_to 'グループを削除', "/groups/#{group.id}", method: :delete, class:"btn" %>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
         <br>
 
         <div class="group-new">
-            <%= link_to '新規グループ作成', new_group_path, class:"btn" %>
+            <%= link_to '新規作成', new_group_path, class:"btn" %>
+            <%= link_to 'ホーム画面', select_users_path, class:"btn" %>
         </div>
     </div>
     <br>
-    <div class="user-page">
-        <%= link_to 'トップページへ', root_path, class:"btn" %>
-    </div>
+
 </div>

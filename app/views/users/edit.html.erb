@@ -23,15 +23,23 @@
         <% end %><br />
         <%= f.password_field :password, autocomplete: "on" %>
       </div>
-
+   
+      <div>
+        <%= f.label :assist, "お手伝いお願いします" %>
+        <%= f.radio_button :assist, :true %>
+      
+        <%= f.label :assist, "今のところ大丈夫です" %>
+        <%= f.radio_button :assist, :false %>
+      </div>
+      <br>
       <div class="field">
         <%= f.label :assist1 %><br />
-        <%= f.text_field :assist1 %>
+        <%= f.select(:assist1, ["買い物", "掃除", "洗濯", "除雪", "排雪", "その他"])%>
       </div>
 
       <div class="field">
         <%= f.label :assist2 %><br />
-        <%= f.text_field :assist2 %>
+        <%= f.select(:assist2, ["買い物", "掃除", "洗濯", "除雪", "排雪", "その他"])%>
       </div>
 
       <div class="field">
