@@ -2,18 +2,20 @@
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| name               | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| assists1           | string |             |
-| assists2           | string |             |
-| memo               | text   |             |
+| Column             | Type    | Options                     |
+| ------------------ | ------- | --------------------------- |
+| name               | string  | null: false                 |
+| email              | string  | null: false                 |
+| encrypted_password | string  | null: false                 |
+| assists            | boolean | null: false, default: false |
+| assists1           | string  |                             |
+| assists2           | string  |                             |
+| memo               | text    |                             |
 
 ### Association
 
 - has_many :schedules
+- has_many :need_assists
 - has_many :group_users
 - has_many :groups, through: :group_users
 
@@ -56,13 +58,3 @@
 - belongs_to :user
 - has_one :need_assist
 
-## need_assists テーブル
-
-| Column   | Type       | Options                        |
-| -------- | ---------- | ------------------------------ |
-| user     | references | null: false, foreign_key: true |
-| schedule | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :schedule

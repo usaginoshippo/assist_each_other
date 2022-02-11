@@ -4,17 +4,17 @@
 .simple-calendar {
   .day {}
 
-  .wday-0 {background-color: rgb(230, 176, 176);}
+  .wday-0 {background-color: rgb(250, 223, 227)}
   .wday-1 {}
   .wday-2 {}
   
   .wday-3 {}
   .wday-4 {}
   .wday-5 {}
-  .wday-6 {background-color: rgb(221, 203, 221);}
+  .wday-6 {background-color: rgb(233, 250, 250)}
 
   .today {background-color: paleturquoise;}
-  .past {background-color: gray;}
+  .past {background-color: rgb(199, 196, 196);}
   .future {}
 
   .start-date {}
@@ -24,4 +24,5 @@
   .current-month {}
 
   .has-events {}
+  
 }

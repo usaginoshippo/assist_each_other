@@ -5,16 +5,14 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.new
     @group = Group.find(params[:group_id])
     @schedules = @group.schedules.all
-  end
+    @users = User.all
 
-  def new
-    @schedule = Schedule.new
   end
 
   def create
     @group = Group.find(params[:group_id])
     @schedule = @group.schedules.new(schedule_params)
-    if@schedule.save
+    if @schedule.save
       redirect_to group_schedules_path(@group)
     else
       render :index
@@ -49,7 +47,7 @@ class SchedulesController < ApplicationController
 
   private
   def schedule_params
-    params.require(:schedule).permit(:content, :start_time).merge(user_id: current_user.id, group_id: params[:group_id])
+    params.require(:schedule).permit(:start_time, :assisted, :content_id).merge(user_id: current_user.id, group_id: params[:group_id])
   end
 
   def set_beginning_of_week

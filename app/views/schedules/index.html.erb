@@ -1,90 +1,74 @@
-<%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn" %>
-<p id="notice"><%= notice %></p>
-
-<%= @group.name %>
-<%= current_user.name %>
-<div class='chat-room-form'>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="schedule">今後の予定一覧</div>
-      <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th>内容</th>
-            <th>日程</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @schedules.each do |schedule| %>
-          <tr>
-            <td><%= schedule.content %></td>
-            <td><%= schedule.start_time.strftime("%m/%d") %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <br>
-
-      <%= form_with(model: [@group,@schedule], local: true) do |form| %>
-
-      <div class="title">
-        <div class="form-tag">お手伝いする人を選んでください</div>
-          <select name="schedule[user_id]">
-            <%= User.where.not( id: current_user.id ).each do |user| %>
-            <option value=<%= user.id %>><%= user.name %></option>
-            <% end %>
-          </select>
-        </div>
-
-        <div class="content">
-          <div class="form-tag">内容</div>
-          <%= form.text_field :content %>
-            <%# <select>
-            <option>除雪</option>
-            <option>排雪</option>
-            <option>買い物</option>
-            <option>食事</option>
-            <option>洗濯</option>
-            <option>掃除</option>
-            </select> %>
-
-          <div class="time">
-            <div class="form-tag">日時(例: 2022年12月13日-12:00)</div>
-          </div>
-          
-          <div class="time_assist">
-            <%= form.datetime_select :start_time %>
-          </div>
-
-          <div class="submit">
-            <%= form.submit %>
-          </div>
-          <% end %>
-        </div>
-        <div>
-          <%= link_to 'マイページを表示', user_path(current_user.id), class: "btn" %>
-        </div>
-        <br>
-        <br>
-        <div class="col-md-8">
-          <%= month_calendar events: @schedules do |date, schedules| %>
-          <%= date.day %>
-
-          <% schedules.each do |schedule| %>
-            <div>
-              <%# <%= @need_assist.user.name 助けてほしい人の名前 + "さんちの"  %> 
-              <% if current_user.id == schedule.user_id %>
-              <%= link_to schedule.content, "/groups/#{schedule.group.id}/schedules/#{schedule.id}" %>
-              <% else %>
-              <%= schedule.content %>
-              <% end %>
-              <%= schedule.start_time.strftime("%H:%M") %>
-              <%= schedule.user.name %>
-            </div>
-          <% end %>
-          <% end %>
-        </div>
-      </div>
+<div class = "schedule_input">
+  <div class = "schedule_left">
+    <div class = "schedule_top_botten">
+    
+    <p id="notice"><%= notice %></p>
     </div>
+
+    <div class="title">
+    <%= "お手伝いが必要な人&項目リスト" %>
+    </div><br>
+    <%= render partial: 'users/assisted_user' %>
+    <br>
+
+    <%= form_with(model: [@group,@schedule], local: true) do |form| %>
+
+    <div class="title">
+      <div class="form-tag">お手伝いしたい人の名前を入力</div>
+      <%= form.text_field :assisted %>
+    </div>
+      <%#= form.collection_select(:assisted, User.where(assist: true), :id, :name, {},{class:"content-select"}) %>
+          <%# <select name= "assisted"> 
+          <%= User.where(assist: true).each do |user| %> 
+          <%# <option><%= user.name></option>  %>
+          <%# <% end %> 
+        <%# </select> %>
+      <%# </div> %>
+
+    <div class="title">
+      <div class="form-tag">内容</div>
+      <%= form.collection_select(:content_id, Content.all, :id, :name, {},{class:"content-select"}) %>
+    </div>
+    
+      <br>
+    <div class="title">
+        <div class="form-tag">日時(例: 2022年12月13日-12:00)</div>
+    </div>
+    <div class="time_assist">
+      <%= form.datetime_select :start_time %>
+    </div>
+
+    <div class="submit">
+      <%= form.submit %>
+    </div>
+    <% end %>
+  </div>
+
+  <div class = "schedule_right">
+    <h1><div class = "schedule_title">
+    <%= current_user.name %>
+    <%= @group.name + "グループ" %>
+    </div></h1>
+
+    <div class="col-md-4"> <br>
+      <div class="col-md-8">
+        <%= month_calendar events: @schedules do |date, schedules| %>
+        <%= date.day %>
+
+        <% schedules.each do |schedule| %>
+          <div>
+            <%= schedule.assisted + "さんの" %> 
+            <% if current_user.id == schedule.user_id %>
+            <%= link_to schedule.content.name, "/groups/#{schedule.group.id}/schedules/#{schedule.id}" %>
+            <% else %>
+            <%= schedule.content.name %>
+            <% end %>
+            <%= schedule.start_time.strftime("%H:%M") %>
+            <%= schedule.user.name %>
+          </div>
+        <% end %>
+        <% end %>
+      </div>
+    </div><br>
   </div>
 </div>

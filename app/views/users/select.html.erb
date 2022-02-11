@@ -1,15 +1,26 @@
 <div class="contents row">
   <div class="container">
   <h1>グループを選んでください。</h1>
-  <% current_user.groups.each do |group| %>
-    <div class= "group">
+  <br>
+  <ul>
+    <h1>グループ名
+    <div class="group">
+    <% current_user.groups.each do |group| %>
       <div class = "group_name">
-      <%= link_to  group.name, group_schedules_path(group) %></a>
+        <li type = "disc">
+        <%= link_to  group.name, group_schedules_path(group) , class:"inbtn"%></a>
+        </li>
       </div>
-    </div> 
-  <% end %>
-          <div class="group-new">
-            <%= link_to '新規グループ作成', new_group_path, class:"btn" %>
-            <%= link_to 'グループに参加する', groups_path, method: :get, class:"btn" %>
-        </div>
+    <% end %>
+    </div>
+    </h1>
+  </ul>
+  <br>
+</div>
+  <div class="group-new">
+    <%= link_to 'グループを追加変更', groups_path, method: :get, class:"btn" %>
+  </div>
+<div>
+<%= render partial: 'users/mycalender' %>
+
 </div>

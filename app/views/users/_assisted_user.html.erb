@@ -1,0 +1,25 @@
+<div class="user_assisted">
+<% @users.each do |user|%>
+  <div class="user_name">
+    <%= user.name %>
+  </div>
+  <% if user.assist1.present? %>
+  <div class="user_assist1">
+    <%= '・'+ user.assist1 %>
+  </div>
+  <%end%>
+
+  <% if user.assist2.present? %>
+  <div class="user_assist2">
+    <%= '・'+ user.assist2 %>
+  </div>
+  <%end%>
+
+  <% if user.memo.present? %>
+  <div class="user_assist2">
+    <%= '・'+ user.memo %>
+  </div>
+  <%end%>
+  <br/>
+<%end%>
+</div>
