@@ -9,5 +9,5 @@ class User < ApplicationRecord
   has_many :groups, through: :group_users
 
   validates :assist, inclusion: [true, false]
-
+  validates :name, presence: true
 end
